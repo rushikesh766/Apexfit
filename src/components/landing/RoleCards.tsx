@@ -9,9 +9,10 @@ interface RoleCardProps {
   features: string[];
   badge?: string;
   comingSoon?: boolean;
+  href?: string;
 }
 
-function RoleCard({ icon, title, description, features, badge, comingSoon }: RoleCardProps) {
+function RoleCard({ icon, title, description, features, badge, comingSoon, href }: RoleCardProps) {
   return (
     <div
       style={{
@@ -103,7 +104,8 @@ function RoleCard({ icon, title, description, features, badge, comingSoon }: Rol
       </ul>
 
       {!comingSoon && (
-        <button
+        <a
+          href={href || "/login"}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -117,11 +119,12 @@ function RoleCard({ icon, title, description, features, badge, comingSoon }: Rol
             width: "100%",
             justifyContent: "center",
             transition: "all 0.2s ease",
+            textDecoration: "none",
           }}
         >
           Continue as {title}
           <ArrowRight size={16} />
-        </button>
+        </a>
       )}
     </div>
   );
@@ -139,6 +142,7 @@ export function RoleCards() {
         "Leaderboard rankings",
         "Progress analytics",
       ],
+      href: "/student",
     },
     {
       icon: <Users size={28} />,
@@ -150,6 +154,7 @@ export function RoleCards() {
         "Workout plan builder",
         "Performance reports",
       ],
+      href: "/trainer",
     },
     {
       icon: <Building2 size={28} />,
@@ -161,6 +166,7 @@ export function RoleCards() {
         "Staff management",
         "Member billing",
       ],
+      href: "/owner",
     },
   ];
 

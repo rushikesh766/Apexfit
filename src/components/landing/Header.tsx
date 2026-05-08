@@ -116,18 +116,20 @@ export function Header() {
           }}
           className="desktop-cta"
         >
-          <button
+          <a
+            href="/login"
             style={{
               background: "none",
               color: "var(--foreground)",
               fontSize: "0.9375rem",
               fontWeight: 500,
+              textDecoration: "none",
             }}
           >
             Log In
-          </button>
-          <button
-            onClick={() => scrollToSection("roles")}
+          </a>
+          <a
+            href="/login"
             style={{
               padding: "0.625rem 1.25rem",
               background: "var(--primary)",
@@ -135,10 +137,11 @@ export function Header() {
               borderRadius: "var(--radius-sm)",
               fontSize: "0.9375rem",
               fontWeight: 600,
+              textDecoration: "none",
             }}
           >
             Get Started
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -211,7 +214,8 @@ export function Header() {
                 borderTop: "1px solid var(--border)",
               }}
             >
-              <button
+              <a
+                href="/login"
                 style={{
                   flex: 1,
                   padding: "0.75rem",
@@ -219,12 +223,14 @@ export function Header() {
                   color: "var(--foreground)",
                   borderRadius: "var(--radius-sm)",
                   fontWeight: 600,
+                  textDecoration: "none",
+                  textAlign: "center",
                 }}
               >
                 Log In
-              </button>
-              <button
-                onClick={() => scrollToSection("roles")}
+              </a>
+              <a
+                href="/login"
                 style={{
                   flex: 1,
                   padding: "0.75rem",
@@ -232,10 +238,12 @@ export function Header() {
                   color: "white",
                   borderRadius: "var(--radius-sm)",
                   fontWeight: 600,
+                  textDecoration: "none",
+                  textAlign: "center",
                 }}
               >
                 Get Started
-              </button>
+              </a>
             </div>
           </nav>
         </div>
