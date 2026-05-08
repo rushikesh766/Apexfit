@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "APEXFIT - Gym Management OS",
-  description: "A premium mobile-first gym management app for owners, trainers, and members.",
+  title: "APEXFIT - Premium Gym Management Software",
+  description: "The all-in-one gym management platform for owners, trainers, and members. Track attendance, manage memberships, and grow your fitness business.",
   manifest: "/manifest.json",
   applicationName: "APEXFIT",
   appleWebApp: {
     capable: true,
     title: "APEXFIT",
-    statusBarStyle: "black-translucent"
+    statusBarStyle: "default"
   },
   icons: {
     icon: "/icons/apexfit-icon.svg",
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#0d0d0f"
+  themeColor: "#ffffff"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-white">
       <body>{children}</body>
     </html>
   );
