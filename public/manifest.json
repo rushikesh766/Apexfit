@@ -1,0 +1,28 @@
+{
+  "name": "APEXFIT Gym Management",
+  "short_name": "APEXFIT",
+  "description": "Premium gym operating system for owners, trainers, and members.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0f",
+  "theme_color": "#d9ff3f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/apexfit-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["fitness", "business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Check In",
+      "short_name": "Check In",
+      "description": "Open APEXFIT check-in",
+      "url": "/?shortcut=check-in",
+      "icons": [{ "src": "/icons/apexfit-icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ]
+}
