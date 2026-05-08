@@ -1,18 +1,50 @@
-"use client";
+import { CheckCircle, Calendar, Fingerprint, QrCode, Smartphone } from "lucide-react";
 
-import { CheckCircle, Clock, Calendar, Fingerprint, QrCode, Smartphone } from "lucide-react";
+// Static attendance data to avoid hydration mismatch
+const STATIC_ATTENDANCE_DATA: { day: number; status: "present" | "absent" | "future" }[] = [
+  { day: 1, status: "present" },
+  { day: 2, status: "present" },
+  { day: 3, status: "absent" },
+  { day: 4, status: "present" },
+  { day: 5, status: "present" },
+  { day: 6, status: "present" },
+  { day: 7, status: "absent" },
+  { day: 8, status: "present" },
+  { day: 9, status: "present" },
+  { day: 10, status: "present" },
+  { day: 11, status: "present" },
+  { day: 12, status: "absent" },
+  { day: 13, status: "present" },
+  { day: 14, status: "present" },
+  { day: 15, status: "present" },
+  { day: 16, status: "present" },
+  { day: 17, status: "present" },
+  { day: 18, status: "absent" },
+  { day: 19, status: "present" },
+  { day: 20, status: "present" },
+  { day: 21, status: "future" },
+  { day: 22, status: "future" },
+  { day: 23, status: "future" },
+  { day: 24, status: "future" },
+  { day: 25, status: "future" },
+  { day: 26, status: "future" },
+  { day: 27, status: "future" },
+  { day: 28, status: "future" },
+  { day: 29, status: "future" },
+  { day: 30, status: "future" },
+  { day: 31, status: "future" },
+];
+
+// Static values to avoid hydration mismatch
+const DISPLAY_MONTH = "May 2026";
+const TODAY_DATE = 20;
+const FIRST_DAY_OFFSET = 5; // May 2026 starts on Friday (index 5)
+const PRESENT_COUNT = 16;
+const ABSENT_COUNT = 4;
+const ATTENDANCE_RATE = "80%";
 
 export function AttendancePreview() {
-  // Generate mock attendance data for calendar
-  const today = new Date();
-  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-  const attendanceData = Array.from({ length: daysInMonth }, (_, i) => {
-    const day = i + 1;
-    if (day > today.getDate()) return { day, status: "future" };
-    const random = Math.random();
-    if (random > 0.25) return { day, status: "present" };
-    return { day, status: "absent" };
-  });
+  const attendanceData = STATIC_ATTENDANCE_DATA;
 
   const checkInMethods = [
     { icon: <QrCode size={24} />, label: "QR Code", desc: "Scan to check-in" },
@@ -168,7 +200,7 @@ export function AttendancePreview() {
                   color: "var(--foreground)",
                 }}
               >
-                {today.toLocaleString("default", { month: "long", year: "numeric" })}
+                {DISPLAY_MONTH}
               </h3>
             </div>
             <div
@@ -239,9 +271,7 @@ export function AttendancePreview() {
             }}
           >
             {/* Empty cells for days before the 1st */}
-            {Array.from({
-              length: new Date(today.getFullYear(), today.getMonth(), 1).getDay(),
-            }).map((_, i) => (
+            {Array.from({ length: FIRST_DAY_OFFSET }).map((_, i) => (
               <div key={`empty-${i}`} />
             ))}
 
@@ -256,7 +286,7 @@ export function AttendancePreview() {
                   justifyContent: "center",
                   borderRadius: "var(--radius-sm)",
                   fontSize: "0.8125rem",
-                  fontWeight: day === today.getDate() ? 700 : 500,
+                  fontWeight: day === TODAY_DATE ? 700 : 500,
                   background:
                     status === "present"
                       ? "var(--success)"
@@ -269,7 +299,7 @@ export function AttendancePreview() {
                       : status === "absent"
                         ? "#991b1b"
                         : "var(--muted)",
-                  border: day === today.getDate() ? "2px solid var(--primary)" : "none",
+                  border: day === TODAY_DATE ? "2px solid var(--primary)" : "none",
                 }}
               >
                 {day}
@@ -289,9 +319,9 @@ export function AttendancePreview() {
             }}
           >
             {[
-              { label: "Present", value: attendanceData.filter((d) => d.status === "present").length, color: "var(--success)" },
-              { label: "Absent", value: attendanceData.filter((d) => d.status === "absent").length, color: "#ef4444" },
-              { label: "Rate", value: `${Math.round((attendanceData.filter((d) => d.status === "present").length / today.getDate()) * 100)}%`, color: "var(--primary)" },
+              { label: "Present", value: PRESENT_COUNT, color: "var(--success)" },
+              { label: "Absent", value: ABSENT_COUNT, color: "#ef4444" },
+              { label: "Rate", value: ATTENDANCE_RATE, color: "var(--primary)" },
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>
                 <div
